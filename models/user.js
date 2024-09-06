@@ -10,18 +10,17 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true,
         lowercase: true,  // Convert email to lowercase
-        validate: {
-            validator: function (v) {
-                return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);  // Regex for validating email
-            },
-            message: props => `${props.value} is not a valid email!`
-        }
     },
     password: {
         type: String,
         required: true,
         minlength: 6
-    }
+    },
+    isVarified:{
+        type: Boolean,
+        default:false
+    },
+    varificationToken:String
 });
 
 const User = mongoose.model("User", userSchema);
